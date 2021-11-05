@@ -1,7 +1,7 @@
 # fwb18ganguru
-Doing an assignment in PUG
+Doing an assignment using Mongo
 
-Heroku Server Link : https://fwb18ganguru.herokuapp.com/
+Heroku Server Link : https://db18ganguru.herokuapp.com/
 
 Class Name : Camera
 
