@@ -3,6 +3,57 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+var Camera = require("./models/camera");
+
+const connectionString = process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+// We can seed the collection if needed on
+// server start
+async function recreateDB() {
+  // Delete everything
+  await Camera.deleteMany();
+  let instance1 = new
+    Camera({
+      cName: "Canon",
+      cPixels: "1080p",
+      cCost: 2000
+    });
+  let instance2 = new
+    Camera({
+      cName: "Nikon",
+      cPixels: "1720p",
+      cCost: 7500
+    });
+  let instance3 = new
+    Camera({
+      cName: "Sony",
+      cPixels: "720p",
+      cCost: 1500
+    });
+  instance1.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("First object saved")
+  });
+  instance2.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("Second object saved")
+  });
+  instance3.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("Third object saved")
+  });
+}
+
+let reseed = true;
+if (reseed) {
+  recreateDB();
+}
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -29,12 +80,12 @@ app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
