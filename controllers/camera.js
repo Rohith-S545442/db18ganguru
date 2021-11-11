@@ -14,7 +14,7 @@ exports.camera_create_post = async function (req, res) {
     // We are looking for a body, since POST does not have query parameters.
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
-    // {"cName":"Canon", "cPixels":"1080p", "cost":2000}
+    // {"cName":"Nike", "cPixels":"240p", "cCost":500}
     document.cName = req.body.cName;
     document.cPixels = req.body.cPixels;
     document.cCost = req.body.cCost;
