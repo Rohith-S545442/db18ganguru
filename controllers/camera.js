@@ -80,9 +80,9 @@ ${JSON.stringify(req.body)}`)
         try {
             let toUpdate = await Camera.findById(req.params.id)
             // Do updates of properties
-            if (req.body.camera_type)
-                toUpdate.camera = req.body.camera_type;
-            if (req.body.cName) toUpdate.cName = req.body.cName;
+            if (req.body.cName)
+                toUpdate.cName = req.body.cName;
+            if (req.body.cPixels) toUpdate.cPixels = req.body.cPixels;
             if (req.body.cCost) toUpdate.cCost = req.body.cCost;
             let result = await toUpdate.save();
             console.log("Sucess " + result)
