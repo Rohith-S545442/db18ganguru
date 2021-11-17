@@ -120,3 +120,32 @@ exports.camera_view_one_Page = async function (req, res) {
         res.send(`{'error': '${err}'}`);
     }
 };
+
+// Handle building the view for creating a camera.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.camera_create_Page = function (req, res) {
+    console.log("create view")
+    try {
+        res.render('cameracreate', { title: 'Camera Create' });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
+// Handle building the view for updating a camera.
+// query provides the id
+exports.camera_update_Page = async function (req, res) {
+    console.log("update view for item " + req.query.id)
+    try {
+        let result = await Camera.findById(req.query.id)
+        res.render('cameraupdate', { title: 'Camera Update', toShow: result });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+

@@ -1,0 +1,35 @@
+extends layout
+block content
+ h1= title
+  - let cameraid = toShow._id
+  - let cName = toShow.cName
+  - let cPixels = toShow.cPixels
+  - let cCost = toShow.cCost
+ form(id='CameraForm', action="/resource/cameras", method="PUT")
+  div.form-group
+    label.cameraAttr(for='cName') Camera Name
+    input#costume_type(type='text', name='Name' value=cameraName)
+  div.form-group
+    label.cameraAttr(for='size') Costume size
+    input#size(type='text', name='size' value=camera)
+  div.form-group
+    label.cameraAttr(for='cost') Costume cost
+    input#cost(type='number', name='cost')
+  input(type="submit")
+ script.
+  document.forms['CostumeForm1'].addEventListener('submit', (event) => {
+   event.preventDefault();
+   // TODO do something here to show user that form is being submitted
+   fetch(event.target.action, {
+    method: 'PUT',
+    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+   }).then((resp) => {
+    return resp.json(); // or resp.text() or whatever the server sends
+   }).then((body) => {
+    alert("Save succeded")
+    // TODO handle body
+   }).catch((error) => {
+    // TODO handle error
+    alert("Save failed " + error )
+   });
+  });

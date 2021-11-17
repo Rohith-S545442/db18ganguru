@@ -12,6 +12,12 @@ router.get('/camera/:id', camera_controlers.camera_detail);
 /* GET detail camera page */
 router.get('/detail', camera_controlers.camera_view_one_Page);
 
+/* GET create costume page */
+router.get('/create', camera_controlers.camera_create_Page);
+
+/* GET create update page */
+router.get('/update', camera_controlers.camera_update_Page);
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('camera', { title: 'Search Results Camera' });

@@ -1,20 +1,21 @@
 extends layout
+
 block content
-h1= title
-- let cameraid = toShow._id
-- let cName = toShow.cName
-- let cPixels = toShow.cPixels
-- let cCost = toShow.cCost
-div
-div.row
-div(class='cameraAttr mr-3') Camera ID is:
-div #{cameraid}
-div.row
-div(class='cameraAttr mr-3') Camera Name is:
-div #{cName}
-div.row
-div(class='cameraAttr mr-3') Camera Pixels is:
-div #{cPixels}
-div.row
-div(class='cameraAttr mr-3') Camera Cost is:
-div #{cCost}
+  h1= title
+    - let cameraid = toShow._id   
+    - let cName = toShow.cName
+    - let cPixels = toShow.cPixels
+    - let cCost = toShow.cCost 
+    div
+      div.row
+        div(class='cameraAttr mr-3') camera ID is:
+        div #{cameraid}
+      div.row
+        div(class='cameraAttr mr-3') Name is:
+        div #{cName}
+      div.row
+        div(class='cameraAttr mr-3') Pixels is:
+        div #{cPixels}
+      div.row
+        div(class='cameraAttr mr-3') Cost is:
+        div #{cCost}
