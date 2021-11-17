@@ -74,22 +74,49 @@ exports.camera_detail = async function (req, res) {
 };
 
 // Handle Camera update form on PUT.
-    exports.camera_update_put = async function (req, res) {
-        console.log(`update on id ${req.params.id} with body
+exports.camera_update_put = async function (req, res) {
+    console.log(`update on id ${req.params.id} with body
 ${JSON.stringify(req.body)}`)
-        try {
-            let toUpdate = await Camera.findById(req.params.id)
-            // Do updates of properties
-            if (req.body.cName)
-                toUpdate.cName = req.body.cName;
-            if (req.body.cPixels) toUpdate.cPixels = req.body.cPixels;
-            if (req.body.cCost) toUpdate.cCost = req.body.cCost;
-            let result = await toUpdate.save();
-            console.log("Sucess " + result)
-            res.send(result)
-        } catch (err) {
-            res.status(500)
-            res.send(`{"error": ${err}: Update for id ${req.params.id}
+    try {
+        let toUpdate = await Camera.findById(req.params.id)
+        // Do updates of properties
+        if (req.body.cName)
+            toUpdate.cName = req.body.cName;
+        if (req.body.cPixels) toUpdate.cPixels = req.body.cPixels;
+        if (req.body.cCost) toUpdate.cCost = req.body.cCost;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id}
 failed`);
-        }
-    };
+    }
+};
+
+// Handle Camera delete on DELETE.
+exports.camera_delete = async function (req, res) {
+    console.log("delete " + req.params.id)
+    try {
+        result = await Camera.findByIdAndDelete(req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
+};
+
+// Handle a show one view with id specified by query
+exports.camera_view_one_Page = async function (req, res) {
+    console.log("single view for id " + req.query.id)
+    try {
+        result = await Camera.findById(req.query.id)
+        res.render('cameradetail',
+            { title: 'Camera Detail', toShow: result });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
