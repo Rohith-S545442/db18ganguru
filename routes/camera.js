@@ -18,6 +18,9 @@ router.get('/create', camera_controlers.camera_create_Page);
 /* GET create update page */
 router.get('/update', camera_controlers.camera_update_Page);
 
+/* GET create camera page */
+router.get('/delete', camera_controlers.camera_delete_Page);
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('camera', { title: 'Search Results Camera' });
