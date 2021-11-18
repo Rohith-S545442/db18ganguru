@@ -13,11 +13,11 @@ block content
         div.row(class='mb-2') 
             div.mr-1 ID is 
             div #{cameraid}  
-        - let actionid = "/resource/camera/" + canteenid 
+        - let actionid = "/resource/camera/" + cameraid 
         form(id='CameraForm', action=actionid, method="PUT") 
             div.form-group 
                 label.cameraAttr(for='cName') Camera Name 
-                input#cName(type='text', name='cName',value = scName)
+                input#cName(type='text', name='cName',value = cName)
             div.form-group 
                 label.cameraAttr(for='cPixels') Camera Pixels 
                 input#cPixels(type='text', name='cPixels',value = cPixels ) 
