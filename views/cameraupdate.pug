@@ -1,43 +1,45 @@
 extends layout 
  
-block content 
-  h1= title 
- 
-  - let cameraid = toShow._id 
-  - let cName = toShow.cName
-  - let cPixels = toShow.cPixels 
-  - let cCost = toShow.cCost 
-   
-  div.row(class='mb-2') 
-    div.mr-1 ID is 
-    div #{cameraid} 
-  - let actionid = "/resource/camera/" + cameraid 
-  form(id='cameraForm', action= actionid, method="PUT") 
-    div.form-group 
-        label.cameraAttr(for='cName') Name
-        input#cName(type='text', name='cName', value= cName ) 
-    div.form-group 
-        label.cameraAttr(for='cPixels') Pixels 
-        input#cPixels(type='text', name='cPixels', value= cPixels) 
-    div.form-group 
-        label.cameraAttr(for='cCost') Cost
-        input#cCost(type='number', name='cCost', value= cCost) 
-    input(type="submit") 
- 
-  script.
-    document.forms['cameraForm'].addEventListener('submit', (event) => {
-      event.preventDefault();
-      // TODO do something here to show user that form is being submitted 
-      fetch(event.target.action, {
-        method: 'PUT',
-        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
-      }).then((resp) => {
-        return resp.text(); // or resp.text() or whatever the server sends 
-      }).then((body) => {
-        alert("Update succeded")
-        // TODO handle body
-      }).catch((error) => {
-        // TODO handle error
-        alert("Update failed " + error )
-      }); 
-    });
+block content
+    h1= title
+    if(toShow == null)
+        h2 No instance to update
+    else
+        - let cameraid = toShow._id
+        - let cName = toShow.cName 
+        - let cPixels = toShow.cPixels 
+        - let cCost = toShow.cCost
+
+        div.row(class='mb-2') 
+            div.mr-1 ID is 
+            div #{cameraid}  
+        - let actionid = "/resource/camera/" + canteenid 
+        form(id='CameraForm', action=actionid, method="PUT") 
+            div.form-group 
+                label.cameraAttr(for='cName') Camera Name 
+                input#cName(type='text', name='cName',value = scName)
+            div.form-group 
+                label.cameraAttr(for='cPixels') Camera Pixels 
+                input#cPixels(type='text', name='cPixels',value = cPixels ) 
+            div.form-group 
+                label.cameraAttr(for='cCost') Camera Cost
+                input#cCost(type='number', name='cCost',value = cCost) 
+            input(type="submit") 
+        
+        script. 
+            document.forms['CameraForm'].addEventListener('submit', (event) => { 
+            event.preventDefault(); 
+            // TODO do something here to show user that form is being submitted 
+            fetch(event.target.action, { 
+                method: 'PUT', 
+                body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+            }).then((resp) => { 
+                return resp.json(); // or resp.text() or whatever the server sends 
+            }).then((body) => { 
+                alert("Update succeded") 
+                // TODO handle body 
+            }).catch((error) => { 
+                // TODO handle error 
+                alert("Save failed " + error ) 
+            }); 
+            });

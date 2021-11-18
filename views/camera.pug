@@ -2,34 +2,18 @@ extends layout
 
 block content
   h1= title
-  p Camera results
-  div(class="container-fluid")
-        div(class="row")
-            -
-                let details = [
-                    {
-                        "cName": "Canon",
-                        "cPixels": "1080p",
-                        "cCost": 2000
-                    },
-                    {
-                        "cName": "Nikon",
-                        "cPixels": "1720p",
-                        "cCost": 7500
-                    },
-                    {
-                        "cName": "Sony",
-                        "cPixels": "720p",
-                        "cCost": 1500
-                    },                   
-                ]
-            each c,index in details
-                div(class="col-sm-2" onclick=`buy(${index})`) #{c.cName}
-                div(class="col-sm-2" onclick=`buy(${index})`) #{c.cPixels}
-                div(class="col-sm-2" onclick=`buy(${index})`) #{c.cCost}
-
-                script.                
-                      function buy(itemNo)
-                      {
-                            alert(`You purchased item ${itemNo+1}`)
-                      }
+  - let cameras = results; 
+  table(class="table table-stripped table-bordered")
+        thead(style="background-color:yellow; color:red;font-size:20px;font-family:calibri;") 
+            tr
+                td Camera ID
+                td Camera name 
+                td Camera Pixels 
+                td Camera Cost 
+        tbody 
+            each camera in cameras 
+                tr
+                    td #{camera._id}
+                    td #{camera.cName}
+                    td #{camera.cPixels}
+                    td #{camera.cCost}

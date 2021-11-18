@@ -149,3 +149,19 @@ exports.camera_update_Page = async function (req, res) {
     }
 };
 
+// Handle a delete one view with id from query
+exports.camera_delete_Page = async function (req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try {
+        result = await Camera.findById(req.query.id)
+        res.render('cameradelete', {
+            title: 'Camera Delete', toShow:
+                result
+        });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
