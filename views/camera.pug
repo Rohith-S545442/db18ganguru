@@ -10,10 +10,18 @@ block content
                 td Camera name 
                 td Camera Pixels 
                 td Camera Cost 
+                td Update
         tbody 
-            each camera in cameras 
+            each camera in cameras
+                - let destination = `dispatch(\"/camera/update?id=${camera._id}\")`
                 tr
                     td #{camera._id}
                     td #{camera.cName}
                     td #{camera.cPixels}
                     td #{camera.cCost}
+                    td
+                      button.btn( class="btn-primary ml-1", onclick= destination) Update
+                script.
+                    function dispatch(path){
+                      window.location.href=path
+                    }
