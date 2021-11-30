@@ -1,14 +1,14 @@
-extends layout
-
-block content
-  h1= title
-  p No changes in index PUG file<br><br>
-    button(type="button" class="btn btn-success" onClick="update()") Press Me
-  div(id="target") Display
-  script.
-    var client_count=0;
-    function update(){
-      client_count=client_count+1;
-      document.getElementById("target").innerHTML=`Value now ${client_count}`;
-    }
-  a(href='camera') Camera
+extends layout 
+ 
+block content 
+  if (!user) 
+    a(href="/login") Login 
+    br 
+    a(href="/register") Register
+    br
+    a(href="/camera/update") Update 
+  if (user) 
+    p You are currently logged in as #{user.username} 
+    a(href="/camera") Take me to camera 
+    br 
+    a(href="/logout") Logout
