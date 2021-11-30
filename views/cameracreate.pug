@@ -4,13 +4,13 @@ block content
  form(id='CameraForm', action="/resource/camera", method="POST")
   div.form-group
     label.cameraAttr(for='cName') Camera Name
-    input#cName(type='text', name='cName')
+    input#cName(type='text', name='cName', minlength="5", maxlength="9")
   div.form-group
     label.cameraAttr(for='size') Camera Pixels
     input#cPixels(type='text', name='cPixels')
   div.form-group
     label.cameraAttr(for='cost') Camera cost
-    input#cCost(type='number', name='cCost')
+    input#cCost(type='number', name='cCost' , min="199.99", max="999")
   input(type="submit")
  script.
   document.forms['CameraForm'].addEventListener('submit', (event) => {

@@ -3,6 +3,7 @@ extends layout
 block content
   h1= title
   - let cameras = results; 
+  button.btn( class="btn-primary ml-1", onclick= `dispatch(\"/camera/create\")`) Create new Camera
   table(class="table table-stripped table-bordered")
         thead(style="background-color:yellow; color:red;font-size:20px;font-family:calibri;") 
             tr
@@ -11,6 +12,8 @@ block content
                 td Camera Pixels 
                 td Camera Cost 
                 td Update
+                td Details 
+                td Delete
         tbody 
             each camera in cameras
                 - let destination = `dispatch(\"/camera/update?id=${camera._id}\")`
@@ -21,6 +24,10 @@ block content
                     td #{camera.cCost}
                     td
                       button.btn( class="btn-primary ml-1", onclick= destination) Update
+                    td
+                      button.btn( class="btn-primary ml-1", onclick= `dispatch(\"/camera/detail?id=${camera._id}\")`) Detail
+                    td
+                      button.btn( class="btn-primary ml-1", onclick= `dispatch(\"/camera/delete?id=${camera._id}\")`) Delete
                 script.
                     function dispatch(path){
                       window.location.href=path

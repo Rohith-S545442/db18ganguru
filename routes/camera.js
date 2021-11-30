@@ -18,7 +18,7 @@ module.exports = router;
 router.get('/camera/:id', camera_controlers.camera_detail);
 
 /* GET detail camera page */
-router.get('/detail', camera_controlers.camera_view_one_Page);
+router.get('/detail',secured, camera_controlers.camera_view_one_Page);
 
 /* GET create costume page */
 router.get('/create', camera_controlers.camera_create_Page);
@@ -27,7 +27,7 @@ router.get('/create', camera_controlers.camera_create_Page);
 router.get('/update',secured, camera_controlers.camera_update_Page);
 
 /* GET create camera page */
-router.get('/delete', camera_controlers.camera_delete_Page);
+router.get('/delete',secured, camera_controlers.camera_delete_Page);
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
